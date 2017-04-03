@@ -1,0 +1,3 @@
+tmp/logs/*
+!tmp/logs/.gitkeep
+config/config.php
