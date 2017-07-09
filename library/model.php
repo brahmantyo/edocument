@@ -1,10 +1,8 @@
 <?php
 
-abstract class Model
-{
-	protected $_db;
-	public function __construct(Database $db)
-	{
-		$this->_db = $db;
-	}
+abstract class Model {
+    public $_db;
+    public function __construct(Database $db) {
+        $this->_db = $db;
+    }
 }

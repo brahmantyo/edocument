@@ -1,12 +1,14 @@
 <?php
-require 'vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
+require ROOT.'/vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
 class Email extends PHPMailer
 {
+        private $_service;
 	public $ErrorInfo;
 	private $address;
 	public $mail;
 
-	function __construct(){
+        function __construct(){
+                //$this->_service = new Service;
 		// $this->mail             = new PHPMailer();
 		$this->mail = $this;
 
@@ -34,7 +36,7 @@ class Email extends PHPMailer
 	}
 
 	public function sendemail(){
-		$this->mail->Send();
+		return $this->mail->Send();
 	}
 
 	public function to($address,$address_name=''){

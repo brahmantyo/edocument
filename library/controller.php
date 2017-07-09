@@ -5,10 +5,33 @@ class Controller {
 	protected $model;
 	protected $view_name;
 	protected $privileges;
+	protected $route;
+	protected $obj_name;
 	public function __construct() {
+		$this->obj_name = get_class($this);
+		logs('Masuk '.$this->obj_name);
 		$this->view_name = '';
 		$this->view = new View();
+		$this->route = $this->getUrl();
+		$this->Assign('successMessage','');
+		$this->Assign('errorMessage','');
 		// logs('Load ' . get_called_class() . ' Class From [' . __CLASS__ . '] Class');
+	}
+
+	protected function getUrl(){
+		if (isset($_GET['url'])){
+			$route = $_GET['url'];
+			$r = get_class_methods($this->obj_name);
+			$m = explode('/',$route);
+			if(array_key_exists(1, $m)){
+				if(in_array($m[1],$r)){
+					return $route;
+				}
+			}else{
+				return $route.'/index';
+			}
+		}
+		return;
 	}
 
 	public function index(){
@@ -20,7 +43,7 @@ class Controller {
 	}
 
 	public function Load_Model($name){
-		$modelName = $name . '_Model';
+		$modelName = $name;
 		$this->model = new $modelName();
 		logs('Create object from '.$modelName);
 	}

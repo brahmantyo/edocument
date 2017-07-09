@@ -9,9 +9,10 @@ class View {
 		// logs('Load ' . get_called_class() . ' Class From [' . __CLASS__ . '] Class');
 
 		$this->data['site_title'] = '';
+		$this->data['site_name'] = '';
 		$this->data['site_icon'] = '';
-		$this->data['meta_description'] = '';
 		$this->data['meta_keywords'] = '';
+		$this->data['meta_description'] = '';
 
 		$this->data['css'] = '';
 		$this->data['js'] = '';
@@ -19,7 +20,11 @@ class View {
 		$this->data['header'] = '';
 		$this->data['content'] = '';
 		$this->data['footer'] = '';
-
+		$this->Set_Site_Title(APP_NAME.' - '.APP_TITLE);
+		$this->Set_Site_Name(strtoupper(APP_NAME));
+		$this->Set_Site_Icon(APP_ICON);
+		$this->Set_Meta_Keywords(KEYWORDS);
+		$this->Set_Meta_Description(DESCRIPTION);
 	}
 
 	public function Assign($variable = '', $value) {
@@ -69,6 +74,10 @@ class View {
 
 	public function Set_Site_Title($name){
 		$this->data['site_title'] = ' ' . $name . ' ';
+	}
+
+	public function Set_Site_Name($name){
+		$this->data['site_name'] = ' ' . $name . ' ';
 	}
 
 	public function Set_Site_Icon($filename){

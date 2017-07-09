@@ -24,6 +24,9 @@ define('HOST','localhost');				//Host Database
 
 define('APP_NAME','APPLICATION_NAME');			//Nama Aplikasi
 define('APP_TITLE','APPLICATION_DESCRIPTION');		//Deskripsi Aplikasi
+define('APP_ICON','APPLICATION ICON PATH FILE');
+define('KEYWORDS','KEYWORDS FOR SEARCH ENGINE');
+define('DESCRIPTION','');
 define('PAGE_LENGTH',10);				//Default jumlah item per page
 
 //DIRECTORIES
@@ -31,14 +34,16 @@ define('LIBRARY_PATH',ROOT . DS . 'library' . DS); 		//Library Directories
 define('CONTROLLER_PATH',ROOT . DS . 'controllers' . DS); 	//Controllers Directories
 define('MODEL_PATH',ROOT . DS . 'models' . DS); 		//Models Directories
 define('LIBRARY',ROOT . DS . 'library' . DS); 			//Library Directories
-
-
-//EMAIL CONFIG
-define('MAIL_FROM','email_pengirim@domainemail');	//Alamat email pengirim
-define('MAIL_FROM_DESC','nama_pengirim');		//Nama Pengirim
-define('MAIL_USERNAME','EMAIL_USERNAME');		//Username/LoginID email server
-define('MAIL_PASSWORD','EMAIL_PASSWORD');		//Password email server
+define('MODULE',ROOT . DS . 'vendor' . DS); //Library Directories
+define('SPOOL_TIMEOUT',60);     //Set error too spooled process after 60 seconds
 
 //Variable di bawah ini jangan dihapus!
 $path;
 $log_type;
+
+//EMAIL CONFIG
+define('MAIL_SERVICE',true);         // true=gunakan service,false=kirim langsung
+define('MAIL_FROM','email_pengirim@domainemail');	//Alamat email pengirim
+define('MAIL_FROM_DESC','nama_pengirim');		//Nama Pengirim
+define('MAIL_USERNAME','EMAIL_USERNAME');		//Username/LoginID email server
+define('MAIL_PASSWORD','EMAIL_PASSWORD');		//Password email server
