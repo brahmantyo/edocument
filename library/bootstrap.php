@@ -219,6 +219,6 @@ logs('Starting app ...');
 session_start();
 
 SetReporting();
-RemoveMagicQuotes();
+//RemoveMagicQuotes();
 UnregisterGlobals();
 CallHook();
