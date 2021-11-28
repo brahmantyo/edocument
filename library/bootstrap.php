@@ -110,7 +110,7 @@ function CallHook() {
 			case 'json': $file_mime='application/json';break;
 			case 'xml': $file_mime='application/xml';break;
 		}
-		if ($file_mime='') return;
+		if ($file_mime=='') return;
 		header('Accept-encoding: gzip, deflate');
 		header('Content-type:'.$file_mime);
 		include_once(ROOT.DS.$uri);
