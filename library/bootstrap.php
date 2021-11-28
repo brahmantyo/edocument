@@ -29,9 +29,9 @@ function RemoveMagicQuotes() {
 /** Check register globals and remove them **/
 function UnregisterGlobals() {
 	if (ini_get('register_globals')) {
-		$array = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
-		foreach ($array as $value) {
-			foreach ($GLOBALS[$value] as $key => $var) {
+		$registers = array('_SESSION', '_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
+		foreach ($registers as $register) {
+			foreach ($GLOBALS[$register] as $key => $var) {
 				if ($var === $GLOBALS[$key]) {
 					unset($GLOBALS[$key]);
 				}
@@ -98,8 +98,24 @@ function __autoload($className) {
 
 /** Main Call Function **/
 function CallHook() {
-	global $url, $path;
-	$path = '';
+	global $uri, $url, $path;
+	if(explode("/",$uri)[1]==DEFAULT_ASSET_PATH)
+	{
+		$file_mime = '';
+		switch(pathinfo($uri)){
+			case 'jpg,jpeg': $file_mime='image/jpg';break;
+			case 'png': $file_mime='image/png';break;
+			case 'css': $file_mime='text/css';break;
+			case 'js': $file_mime='text/javascript';break;
+			case 'json': $file_mime='application/json';break;
+			case 'xml': $file_mime='application/xml';break;
+		}
+		header('Accept-encoding: gzip, deflate');
+		header('Content-type:'.$file_mime);
+		include_once(ROOT.DS.$uri);
+		return;
+	}
+	// $path = '';
 	$tmp = '';
 	$controllerName = null;
 	$action = DEFAULT_ACTION;
@@ -152,6 +168,7 @@ function redirect($url, $action = null, $message = null) {
 	$protocol = $address[0] == 'https' ? 'https' : 'http';
 	$action = isset($action) || $action === '' ? '/?url=' . $action : '';
 	$_SESSION['message'] = $message;
+	logs('URL:'.$url);
 	echo 'Location: ' . $protocol . '://' . $address[1] . $action;
 	logs('Location: ' . $protocol . '://' . $address[1] . $action);
 	return header('Location: ' . $protocol . '://' . $address[1] . $action, true, 302);
